@@ -21,14 +21,14 @@ pipeline {
                 }
             }
         }
-		stage('SonarQube analysis') {
-			steps{
-				def scannerHome = tool 'SonarScanner 4.0';
-				withSonarQubeEnv('SonarQube') {
+		stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube) {
                     // Optionally use a Maven environment you've configured already
-                    sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
-		}
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
     }
 }
