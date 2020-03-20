@@ -9,6 +9,11 @@ pipeline {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
 				 sh 'mvn compile'
+				 echo 'these are the variables'
+				 sh 'ls'
+				 sh 'cd **/target/'
+				 sh 'ls'
+				 
             }
         }
         stage('Sonarqube') {
