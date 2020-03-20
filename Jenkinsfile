@@ -9,12 +9,6 @@ pipeline {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
 				 sh 'mvn compile'
-				 echo 'these are the variables'
-				 sh 'ls'
-				 echo 'second ls:'
-				 sh 'ls target/'
-				 echo 'third ls:'
-				 sh 'ls target/classes'
 				 
             }
         }
