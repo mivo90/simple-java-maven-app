@@ -11,9 +11,11 @@ pipeline {
 				 sh 'mvn compile'
 				 echo 'these are the variables'
 				 sh 'ls'
-				 sh 'cd target/'
+				 sh 'ls target/'
 				 echo 'second ls:'
-				 sh 'ls'
+				 sh 'ls target/'
+				 echo 'third ls:'
+				 sh 'ls target/classes'
 				 
             }
         }
