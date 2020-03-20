@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maven_deploy
+  labels:
+    app: maven
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: maven
+  template:
+    metadata:
+      labels:
+        app: maven
+    spec:
+      containers:
+      - name: maven
+        image: maven_app:$BUILD_ID
+        ports:
+        - containerPort: 80
