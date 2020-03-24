@@ -40,8 +40,10 @@ pipeline {
         stage('Building and Deploy') {
             steps {
                 script {
-                    def dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    dockerImage.push()
+                    docker.withRegistry('https://hub.docker.com', registryCredential) {
+                        def dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        dockerImage.push()
+                    }
                 }
             }
         }
