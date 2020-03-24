@@ -2,27 +2,22 @@ pipeline {
     environment {
         registry = "kwieto/test"
         registryCredential = 'dockerhub'
-	dockerImage = ''
-    } 
+    }
     agent any
-	tools {
-            maven 'Maven'
-            jdk 'jdk8'
-        }
-	docker { 
-	    image 'node:7-alpine' 
-	}
+    tools {
+        maven 'Maven'
+        jdk 'jdk8'
+    }
     stages {
         stage('Maven') {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
-				 sh 'mvn compile'
+                 sh 'mvn compile'
             }
         }
         stage('Sonarqube') {
             environment {
                     scannerHome = tool 'SonarQube Scanner'
-                    
             }
             steps {
                 withSonarQubeEnv('Sonarqube Service') {
@@ -42,25 +37,25 @@ pipeline {
                 }
             }
         }
-	stage('Building image') {
-	    steps {
-	        script {
-	            docker.build registry + ":$BUILD_NUMBER"
-	        }
-	    }
-	}
-	stage('Deploy Image') {
-	    steps {
-		script {
-		    docker.withRegistry( '', registryCredential)
-		    dockerImage.push()
-		}
-	    }
-	}
-	stage('Remove Unused docker image') {
-	    steps {
-	        sh "docker rmi $registry:$BUILD_NUMBER"    
-	    }
+        stage('Building image') {
+            steps {
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Deploy Image') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential)
+                    dockerImage.push()
+                }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
         }
     }
 }
