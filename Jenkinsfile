@@ -8,12 +8,9 @@ pipeline {
 	tools {
         maven 'Maven'
         jdk 'jdk8'
+	docker 'docker'
     }
     stages {
-	stage('Initialize') {
-            dockerHome = tool 'docker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
         stage('Maven') {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
