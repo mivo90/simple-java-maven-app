@@ -49,7 +49,7 @@ pipeline {
         }
         
         stage("Deploy on k8s") {
-            withKubeConfig([credentialsId:733bdc91-6939-49db-a0b8-c25ca64851c8]){
+            withKubeConfig([credentialsId:'733bdc91-6939-49db-a0b8-c25ca64851c8']){
                 /* sh 'kubectl apply -f manifests/'  */
                  sh 'kubectl get all'
             }
