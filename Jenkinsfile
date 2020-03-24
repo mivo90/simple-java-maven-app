@@ -1,11 +1,16 @@
 pipeline {
+    environment {
+        registry = "kwieto/test"
+        registryCredential = 'dockerhub'
+	dockerImage = ''
+    } 
     agent any
 	tools {
         maven 'Maven'
         jdk 'jdk8'
     }
     stages {
-		stage('Maven') {
+        stage('Maven') {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
 				 sh 'mvn compile'
@@ -33,6 +38,26 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
+        }
+	stage('Building image') {
+	    steps {
+	        script {
+	            docker.build registry + ":$BUILD_NUMBER"
+	        }
+	    }
+	}
+	stage('Deploy Image') {
+	    steps {
+		script {
+		    docker.withRegistry( '', registryCredential)
+		    dockerImage.push()
+		}
+	    }
+	}
+	stage('Remove Unused docker image') {
+	    steps {
+	        sh "docker rmi $registry:$BUILD_NUMBER"    
+	    }
         }
     }
 }
