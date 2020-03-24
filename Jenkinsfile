@@ -10,6 +10,10 @@ pipeline {
         jdk 'jdk8'
     }
     stages {
+	stage('Initialize') {
+            def dockerHome = tool 'docker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage('Maven') {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
