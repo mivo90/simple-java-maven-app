@@ -4,11 +4,13 @@ metadata:
   name: kwietoapp
   labels:
     app: kwieto
-spec:
-  replicas: 1
+spec: 
+  replicas: 2
   selector:
     matchLabels:
       app: kwieto
+  type: LoadBalancer
+  Port: 6969
   template:
     metadata:
       labels:
@@ -18,4 +20,4 @@ spec:
       - name: kwieto
         image: kwieto/test
         ports:
-        - containerPort: 80
+        - containerPort: 6969
