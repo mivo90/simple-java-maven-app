@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kwieto/deploy
+  labels:
+    app: kwieto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kwieto
+  template:
+    metadata:
+      labels:
+        app: kwieto
+    spec:
+      containers:
+      - name: kwieto
+        image: kwieto/test
+        ports:
+        - containerPort: 80
