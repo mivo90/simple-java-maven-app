@@ -9,5 +9,11 @@ class HelloControllerTest {
 		HelloController helloController = new HelloController();
 		helloController.hello();
 	}
+
+	@Test
+	public void testTest() {
+		HelloController helloController = new HelloController();
+		helloController.test();
+	}
 }
 
