@@ -50,7 +50,7 @@ pipeline {
         
         stage("Deploy on k8s") {
             steps {
-                  withKubeConfig([credentialsId:'733bdc91-6939-49db-a0b8-c25ca64851c8']){
+                  withKubeConfig([credentialsId: '733bdc91-6939-49db-a0b8-c25ca64851c8', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
                 /* sh 'kubectl apply -f manifests/'  */
                       sh 'kubectl get all'
                   }
