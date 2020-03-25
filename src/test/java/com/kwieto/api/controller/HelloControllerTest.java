@@ -2,7 +2,7 @@ package com.kwieto.api.controller;
 
 import org.junit.Test;
 
-class HelloControllerTest {
+public class HelloControllerTest {
 
 	@Test
 	public void helloTest() {
