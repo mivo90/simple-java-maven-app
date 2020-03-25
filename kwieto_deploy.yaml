@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kwieto_deploy
+  name: kwietoapp
   labels:
     app: kwieto
 spec:
