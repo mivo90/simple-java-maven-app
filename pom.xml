@@ -16,6 +16,10 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<sonar.exclusions>
+			**/HelloController.java,
+			**/ApiApplication.java,
+		</sonar.exclusions>
 	</properties>
 
 	<dependencies>
