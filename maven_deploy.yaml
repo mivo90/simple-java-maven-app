@@ -18,4 +18,4 @@ spec:
       - name: maven
         image: maven_app:$BUILD_ID
         ports:
-        - containerPort: 80
+        - containerPort: 8000

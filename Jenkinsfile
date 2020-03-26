@@ -13,6 +13,7 @@ pipeline {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
                  sh 'mvn compile'
+                 sh 'mvn test'
             }
         }
         stage('Sonarqube') {
@@ -21,7 +22,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('Sonarqube Service') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh 'mvn clean package sonar:sonar'
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
@@ -43,6 +44,7 @@ pipeline {
                     docker.withRegistry('', registryCredential) {
                         def dockerImage = docker.build registry + ":$BUILD_NUMBER"
                         dockerImage.push()
+                        dockerImage.push('latest')
                     }
                 }
             }
@@ -51,8 +53,8 @@ pipeline {
         stage("Deploy on k8s") {
             steps {
                   withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
-                /* sh 'kubectl apply -f manifests/'  */
-                      sh 'kubectl get all'
+                sh 'kubectl apply -f kwieto_deploy.yaml'
+                      sh 'kubectl apply -f kwieto_service.yaml'
                   }
             }
         }
