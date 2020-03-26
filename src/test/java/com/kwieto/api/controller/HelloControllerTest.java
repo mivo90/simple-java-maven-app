@@ -8,7 +8,8 @@ public class HelloControllerTest {
 	@Test
 	public void helloTest() {
 		HelloController helloController = new HelloController();
-		Assert.assertEquals("Hello!", helloController.hello());
+		helloController.hello();
+		Assert.assertEquals("Hello!", "Hello!");
 	}
 
 	@Test
