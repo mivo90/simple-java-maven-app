@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kwieto
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kwieto
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kwieto
-          image: kwieto/test
+          image: kwieto/test:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
