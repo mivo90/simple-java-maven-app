@@ -17,5 +17,6 @@ spec:
       containers:
         - name: kwieto
           image: kwieto/test
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
