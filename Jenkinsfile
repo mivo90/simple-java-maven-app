@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('Maven') {
             steps {
+                 echo "current build number: ${currentBuild.number}"
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
                  sh 'mvn compile'
                  sh 'mvn test'
@@ -55,7 +56,6 @@ pipeline {
                   withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
                 sh 'kubectl apply -f kwieto_deploy.yaml'
                       sh 'kubectl apply -f kwieto_service.yaml'
-                      sh 'echo ' + ${BUILD_NUMBER}
                   }
             }
         }
