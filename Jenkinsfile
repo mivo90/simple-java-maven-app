@@ -13,6 +13,7 @@ pipeline {
             steps {
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
                  sh 'mvn compile'
+                 sh 'mvn test'
             }
         }
         stage('Sonarqube') {
@@ -22,7 +23,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('Sonarqube Service') {
                     sh 'mvn clean package sonar:sonar'
-                    
+
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
