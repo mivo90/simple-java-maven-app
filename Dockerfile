@@ -3,6 +3,6 @@ RUN apk add --no-cache maven
 WORKDIR /java
 COPY . /java
 RUN mvn package -Dmaven.test.skip=true
-EXPOSE 6969
+EXPOSE 80
 
 CMD ["/bin/sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar /java/target/*.jar"]
