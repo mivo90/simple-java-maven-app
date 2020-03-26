@@ -50,13 +50,13 @@ pipeline {
                 }
             }
         }
-        
+
         stage("Deploy on k8s") {
             steps {
                   withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
                       sh 'kubectl apply -f kwieto_deploy.yaml'
                       sh 'kubectl apply -f kwieto_service.yaml'
-                      sh 'kubectl set image deployment/kwietoapp kwieto=kwieto/test:${currentBuild.number} --record '
+                      sh "kubectl set image deployment/kwietoapp kwieto=kwieto/test:$BUILD_NUMBER --record"
                   }
             }
         }
