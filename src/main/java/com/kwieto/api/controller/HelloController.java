@@ -7,7 +7,7 @@ public class HelloController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
-        return "Werkt dit 2.0? ";
+        return "Werkt dit 3.0? ";
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
