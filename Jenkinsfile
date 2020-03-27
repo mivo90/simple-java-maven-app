@@ -9,7 +9,7 @@ pipeline {
         jdk 'jdk8'
     }
     stages {
-        stage('Maven') {
+        stage('Maven unit test') {
             steps {
                  echo "current build number: ${currentBuild.number}"
                  sh 'mvn -Dmaven.test.failure.ignore=true install'
@@ -17,7 +17,7 @@ pipeline {
                  sh 'mvn test'
             }
         }
-        stage('Sonarqube') {
+        stage('Sonarqube analysis') {
             environment {
                     scannerHome = tool 'SonarQube Scanner'
             }
@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('Building and Push') {
+        stage('Building and Pushing docker image') {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
