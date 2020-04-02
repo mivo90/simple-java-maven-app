@@ -5,12 +5,7 @@ import org.junit.Assert;
 
 public class HelloControllerTest {
 
-	@Test
-	public void helloTest() {
-		HelloController helloController = new HelloController();
-		helloController.hello();
-		Assert.assertEquals("Hello!", "Hello!.");
-	}
+
 
 	@Test
 	public void testTest() {
