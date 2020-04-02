@@ -9,7 +9,7 @@ public class HelloControllerTest {
 	public void helloTest() {
 		HelloController helloController = new HelloController();
 		helloController.hello();
-		Assert.assertEquals("Hello!", "Hello!");
+		Assert.assertEquals("Hello!", "Hello!.");
 	}
 
 	@Test
