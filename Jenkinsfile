@@ -47,6 +47,7 @@ pipeline {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
+                     sh "docker rmi $registry:$BUILD_NUMBER"
                 }
             }
         }
@@ -63,10 +64,6 @@ pipeline {
         }
             
                     
-        stage('Remove Unused docker image') {
-            steps {
-                sh "docker rmi $registry:$BUILD_NUMBER"
-            }
-        }
+
     }
 }
