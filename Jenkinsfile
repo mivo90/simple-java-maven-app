@@ -53,7 +53,7 @@ pipeline {
 
         stage("Deploy on k8s") {
             steps {
-                input {
+                input ('Do you want to proceed?'){
                     message 'Deploy on production'
                 }
                 withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
