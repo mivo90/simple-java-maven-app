@@ -50,16 +50,10 @@ pipeline {
                 }
             }
         }
-
-        stage("confirm"){
-            steps {
-                input ('Do you want to proceed?')
-            }
-        }
-        
         
         stage("Deploy on k8s") {
             steps {
+                input ('Do you want to proceed?')
                 withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://atoscicd-dns-9d51d576.hcp.westeurope.azmk8s.io:443']){
                       sh 'kubectl apply -f kwieto_deploy.yaml'
                       sh 'kubectl apply -f kwieto_service.yaml'
